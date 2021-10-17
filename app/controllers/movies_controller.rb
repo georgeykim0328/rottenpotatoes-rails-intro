@@ -7,10 +7,12 @@ class MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    @ratings_to_show = params[:ratings] || {}
+    @movies = Movie.with_ratings(@ratings_to_show.keys)
+    @all_ratings = Movie.all_ratings
   end
 
-  def new
+  def ne
     # default: render 'new' template
   end
 
